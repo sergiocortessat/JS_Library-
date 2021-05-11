@@ -9,7 +9,7 @@
 * [Contact](#authors)
 * [Acknowledgements](#acknowledgements) 
 * [Getting Started](#getting-started) 
-* [Live Demo and Video](#live-demo) 
+* [Live Demo and Video](#live-version) 
 
 #
 <br />
@@ -25,7 +25,9 @@
 * [JAVASCRIPT]
 * [BOOTSTRAP]
 
+## Live Version
 
+* [Live Demo and Video](https://sergiocortessat.github.io/JS_Library-/) 
 
 <!-- ABOUT THE PROJECT   -->
 ## About The Project
