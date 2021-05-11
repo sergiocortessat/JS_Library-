@@ -1,96 +1,105 @@
+const library = [];
+
 const bookList = document.getElementById('book-list');
-const addingBook = document.getElementById('add-book');
-const closingBook = document.getElementById('closing-book');
+const submitButton = document.getElementById('submit-btn');
 const form = document.querySelector('form');
-const bookKeeper = document.getElementById('submit-btn');
 form.style.display = 'none';
 
-function addBookToLibrary() {
-// Adding the div
+const addBook = document.getElementById('add-book');
+
+const cancelBook = document.getElementById('close');
+
+
+addBook.addEventListener('click', () => {
+  form.style.display = 'block';
+});
+
+cancelBook.addEventListener('click', () => {
+  form.style.display = 'none';
+});
+
+const addBookDom = (book) => {
+  // the div
   const divBook = document.createElement('div');
-  divBook.classList.add('row');
-  divBook.classList.add('card');
-  divBook.classList.add('text-center');
-  divBook.classList.add('card-width');
+  divBook.classList.add('books');
+  divBook.classList.add('d-flex');
+  divBook.classList.add('flex-column');
+  divBook.classList.add('justify-content-center');
 
   // add book name
-  const bookName = document.createElement('div');
-  bookName.classList.add('card-header');
-  bookName.textContent = localStorage.getItem('name');
+  const bookName = document.createElement('h2');
+  bookName.classList.add('mx-auto');
+  bookName.textContent = book.bookname;
   divBook.appendChild(bookName);
 
   // add description
-  const description = document.createElement('div');
-  description.classList.add('card-body');
-
-  const hdescription = document.createElement('h5');
-  hdescription.textContent = localStorage.getItem('description');
-  description.appendChild(hdescription);
-
-  const pdescription = document.createElement('p');
-  pdescription.textContent = localStorage.getItem('pages');
-  description.appendChild(pdescription);
+  const description = document.createElement('p');
+  description.classList.add('mx-auto');
+  description.textContent = book.bdescription;
   divBook.appendChild(description);
+
+  // add pages
+  const bookPages = document.createElement('p');
+  bookPages.classList.add('mx-auto');
+  bookPages.textContent = book.pagesnum;
+  divBook.appendChild(bookPages);
 
   // create button
   const readButton = document.createElement('button');
-  readButton.textContent = 'Not read';
+  readButton.textContent = book.status;
   readButton.classList.add('btn');
   readButton.classList.add('btn-success');
-  readButton.classList.add('w-auto');
+  readButton.classList.add('w-25');
   readButton.classList.add('mx-auto');
-  readButton.setAttribute('id', 'read-button');
-  description.appendChild(readButton);
+  divBook.appendChild(readButton);
+
+  // change readbutton status
 
   readButton.addEventListener('click', (e) => {
-    if (localStorage.getItem('status') === 'false') {
-      e.target.textContent = 'Read';
-      localStorage.setItem('status', 'true');
+    if (e.target.textContent === 'false') {
+      e.target.textContent = 'true';
     } else {
-      e.target.textContent = 'Not read';
-      localStorage.setItem('status', 'false');
+      e.target.textContent = 'false';
     }
   });
 
   // <button> to remove a book
   const deleteButton = document.createElement('button');
-  deleteButton.textContent = 'Delete';
+  deleteButton.textContent = 'remove';
   deleteButton.classList.add('btn');
   deleteButton.classList.add('btn-danger');
+  deleteButton.classList.add('w-25');
   deleteButton.classList.add('my-2');
   deleteButton.classList.add('mx-auto');
   divBook.appendChild(deleteButton);
 
-  // <delete> event listener
-  deleteButton.addEventListener('click', (e) => {
-    e.preventDefault();
+  // Remove chield divbook from the parent booklist div
+  deleteButton.addEventListener('click', () => {
     bookList.removeChild(divBook);
   });
 
   bookList.appendChild(divBook);
-}
+};
 
-function Book() {
-  // the constructor...
-  addingBook.addEventListener('click', () => {
-    form.style.display = 'block';
-  });
+// create a book
+const addBookToLibrary = (name, description, pages, read = false) => {
+  const bookObj = {
+    bookname: name, bdescription: description, pagesnum: pages, status: read,
+  };
+  library.push(bookObj);
+  addBookDom(bookObj);
+};
 
-  closingBook.addEventListener('click', () => {
-    form.style.display = 'none';
-  });
+// get the book info frm the form:
 
-  bookKeeper.addEventListener('click', (e) => {
-    e.preventDefault();
-    localStorage.setItem('name', document.getElementById('name').value);
-    localStorage.setItem('description', document.getElementById('description').value);
-    localStorage.setItem('pages', document.getElementById('pages').value);
-    localStorage.setItem('status', 'false');
+submitButton.addEventListener('click', (e) => {
+  e.preventDefault();
 
-    addBookToLibrary();
-    form.reset();
-    form.style.display = 'none';
-  });
-}
+  const bname = document.getElementById('name').value;
+  const npages = document.getElementById('pages').value;
+  const bdescription = document.getElementById('description').value;
 
-Book();
+  addBookToLibrary(bname, bdescription, npages);
+  form.reset();
+  form.style.display = 'none';
+});
