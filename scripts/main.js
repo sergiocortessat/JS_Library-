@@ -69,3 +69,28 @@ function addBookToLibrary() {
 
   bookList.appendChild(divBook);
 }
+
+function Book() {
+  // the constructor...
+  addingBook.addEventListener('click', () => {
+    form.style.display = 'block';
+  });
+
+  closingBook.addEventListener('click', () => {
+    form.style.display = 'none';
+  });
+
+  bookKeeper.addEventListener('click', (e) => {
+    e.preventDefault();
+    localStorage.setItem('name', document.getElementById('name').value);
+    localStorage.setItem('description', document.getElementById('description').value);
+    localStorage.setItem('pages', document.getElementById('pages').value);
+    localStorage.setItem('status', 'false');
+
+    addBookToLibrary();
+    form.reset();
+    form.style.display = 'none';
+  });
+}
+
+Book();
