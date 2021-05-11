@@ -9,7 +9,6 @@ const addBook = document.getElementById('add-book');
 
 const cancelBook = document.getElementById('close');
 
-
 addBook.addEventListener('click', () => {
   form.style.display = 'block';
 });
