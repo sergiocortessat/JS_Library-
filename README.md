@@ -29,13 +29,13 @@
 
 <!-- ABOUT THE PROJECT   -->
 ## About The Project
-
+The Library project allows you to add books, a short description, and the number of pages in it. they will be displayed on the screen. You might era entries as well or mark them as read
 
 
 ## Screenshot Test
 
 <p align="center">
-  <img height="auto" src="app/assets/images/Screenshot9.png">
+  <img height="auto" src="Screenshot.png">
 </p>
 
 
@@ -46,8 +46,6 @@ Contributions make the open-source community such an amazing place to learn, ins
 
 ## Prequisites
 
-Ruby & Rails installed on your local machine.
-Bundle installed on your machine
 Terminal or similar to execute the program.
 
 
@@ -57,55 +55,15 @@ Terminal or similar to execute the program.
 ## Clone project
 
 - To get a local copy up and running follow these simple example steps.
-- Clone this repository with git clone ```https://github.com/sergiocortessat/Rails-Tweet-Redesegin/tree/milestone_1``` using your terminal or command line.
-- Change to the project directory by entering: ```cd Rails-Tweet-Redesegin``` in the terminal.
-
-## How to use the Private-Event app
-1. run the command ```bundle install```   This will install the required dependencies
-2. run the command ```rails webpacker:install ``` This will install the webpack to avoid specific rails => 6 problems
-3. run the command ```rails db:create``` This will initialize the necessary migration files
-4. run the command ```rails db:migrate``` 
-5. run the command ```rails server```
+- Clone this repository with git clone ```https://github.com/sergiocortessat/JS_Library-/tree/feature``` using your terminal or command line.
+- Change to the project directory by entering: ```cd JS_Library-``` in the terminal.
 
 ## Command line steps
 ```
-- $ git clone `$ git clone https://github.com/sergiocortessat/Rails-Tweet-Redesegin/pull/2`
+- $ git clone `$ git clone https://github.com/sergiocortessat/JS_Library-/tree/feature`
 - $ git checkout develop
-- $ cd Rails-Tweet-Redesegin`
-- $ bundle 
-- $ rails webpacker:install 
-- $ rails db:create
-- $ rails db:migrate
-- $ rails server
+- $ cd JS_Library-
 ```
-
-## Testing
-In this project, the testing was done using RSpec to test logic specs.
-
-## Install
-- In a terminal window type gem install RSpec
-- Once RSpec install has finished, type RSpec --init
-- You will see a folder spec and a file .rspec
-- Inside spec folder, you'll see a spec_helper.rb file.
-
-## Run
-The testing files are included in spec folders.
-- Inside your terminal type: rspec spec/*
-- Type rspec spec/* to run all tests
- 
-- All test should pass
-
-## Command line Rspec steps
-```
-- $ gem install rspec
-- $ rspec spec/*
-- $ 29 examples, 0 failures
-
-```
-
-<p align="center">
-  <img height="auto" src="app/assets/images/rspec.png">
-</p>
 
 ## Authors
 
@@ -120,7 +78,6 @@ The testing files are included in spec folders.
 ## Acknowledgements
 
 * [Microverse](https://www.microverse.org/)
-* Design idea by [Gregoire Vella on Behance](https://www.behance.net/gregoirevella)
 
 
 ## 📝 License
