@@ -32,26 +32,6 @@ function addBookToLibrary() {
   description.appendChild(pdescription);
   divBook.appendChild(description);
 
-  // create button
-  const readButton = document.createElement('button');
-  readButton.textContent = 'Not read';
-  readButton.classList.add('btn');
-  readButton.classList.add('btn-success');
-  readButton.classList.add('w-auto');
-  readButton.classList.add('mx-auto');
-  readButton.setAttribute('id', 'read-button');
-  description.appendChild(readButton);
-
-  readButton.addEventListener('click', (e) => {
-    if (localStorage.getItem('status') === 'false') {
-      e.target.textContent = 'Read';
-      localStorage.setItem('status', 'true');
-    } else {
-      e.target.textContent = 'Not read';
-      localStorage.setItem('status', 'false');
-    }
-  });
-
   // <button> to remove a book
   const deleteButton = document.createElement('button');
   deleteButton.textContent = 'Delete';
