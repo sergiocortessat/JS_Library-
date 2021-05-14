@@ -4,21 +4,18 @@ const submitButton = document.querySelector('.submit-btn');
 const form = document.querySelector('form');
 const addBook = document.querySelector('.add-book');
 // FUNCTIONS
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
 
+const Book = (title, author, pages, read) => ({
+  title, author, pages, read,
+});
 
 function addBookToLibrary(title, author, pages, read) {
-  const book = new Book(title, author, pages, read);
+  const book = Book(title, author, pages, read);
   myLibrary.push(book);
 }
 
 function showBook() {
-  console.log(this.textContent);
+  // console.log(this.textContent);
   myLibrary[this.id].read = myLibrary[this.id].read === 'Not yet read'
     ? 'Finished reading'
     : 'Not yet read';
@@ -34,7 +31,7 @@ function deleteBook() {
 function pushToDom() {
   const container = document.querySelector('.js-container');
   container.innerHTML = '';
-  myLibrary.forEach((book,index) => {
+  myLibrary.forEach((book, index) => {
     const bookDiv = document.createElement('div');
     bookDiv.classList.add('book');
     const title = document.createElement('h3');
