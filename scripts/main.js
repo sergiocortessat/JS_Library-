@@ -1,104 +1,89 @@
-const library = [];
-
-const bookList = document.getElementById('book-list');
-const submitButton = document.getElementById('submit-btn');
+// GLOBAL VARIABLES
+const myLibrary = [];
+const submitButton = document.querySelector('.submit-btn');
 const form = document.querySelector('form');
-form.style.display = 'none';
+const addBook = document.querySelector('.add-book');
+// FUNCTIONS
+function Book(title, author, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
 
-const addBook = document.getElementById('add-book');
 
-const cancelBook = document.getElementById('close');
+function addBookToLibrary(title, author, pages, read) {
+  const book = new Book(title, author, pages, read);
+  myLibrary.push(book);
+}
 
-addBook.addEventListener('click', () => {
-  form.style.display = 'block';
-});
+function showBook() {
+  console.log(this.textContent);
+  myLibrary[this.id].read = myLibrary[this.id].read === 'Not yet read'
+    ? 'Finished reading'
+    : 'Not yet read';
+  this.textContent = this.textContent === 'Not yet read'
+    ? 'Finished reading'
+    : 'Not yet read';
+}
 
-cancelBook.addEventListener('click', () => {
-  form.style.display = 'none';
-});
-
-const addBookDom = (book) => {
-  // the div
-  const divBook = document.createElement('div');
-  divBook.classList.add('books');
-  divBook.classList.add('d-flex');
-  divBook.classList.add('flex-column');
-  divBook.classList.add('justify-content-center');
-
-  // add book name
-  const bookName = document.createElement('h2');
-  bookName.classList.add('mx-auto');
-  bookName.textContent = book.bookname;
-  divBook.appendChild(bookName);
-
-  // add description
-  const description = document.createElement('p');
-  description.classList.add('mx-auto');
-  description.textContent = book.bdescription;
-  divBook.appendChild(description);
-
-  // add pages
-  const bookPages = document.createElement('p');
-  bookPages.classList.add('mx-auto');
-  bookPages.textContent = book.pagesnum;
-  divBook.appendChild(bookPages);
-
-  // create button
-  const readButton = document.createElement('button');
-  readButton.textContent = book.status;
-  readButton.classList.add('btn');
-  readButton.classList.add('btn-success');
-  readButton.classList.add('w-25');
-  readButton.classList.add('mx-auto');
-  divBook.appendChild(readButton);
-
-  // change readbutton status
-
-  readButton.addEventListener('click', (e) => {
-    if (e.target.textContent === 'false') {
-      e.target.textContent = 'true';
-    } else {
-      e.target.textContent = 'false';
-    }
+function deleteBook() {
+  myLibrary.splice(this.parentNode, 1);
+  this.parentNode.remove();
+}
+function pushToDom() {
+  const container = document.querySelector('.js-container');
+  container.innerHTML = '';
+  myLibrary.forEach((book,index) => {
+    const bookDiv = document.createElement('div');
+    bookDiv.classList.add('book');
+    const title = document.createElement('h3');
+    title.classList.add('book-title');
+    title.textContent = book.title;
+    const author = document.createElement('p');
+    author.classList.add('book-author');
+    author.textContent = `Author: ${book.author}`;
+    const pages = document.createElement('p');
+    pages.classList.add('book-pages');
+    pages.textContent = `Pages: ${book.pages}`;
+    const read = document.createElement('button');
+    read.classList.add('book-read');
+    read.setAttribute('id', index);
+    read.textContent = book.read === 'Not yet read' ? 'Not yet read' : 'Finished reading.';
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.textContent = 'Delete';
+    bookDiv.append(title, author, pages, read, deleteButton);
+    container.appendChild(bookDiv);
+    read.addEventListener('click', showBook);
+    deleteButton.addEventListener('click', deleteBook);
   });
-
-  // <button> to remove a book
-  const deleteButton = document.createElement('button');
-  deleteButton.textContent = 'remove';
-  deleteButton.classList.add('btn');
-  deleteButton.classList.add('btn-danger');
-  deleteButton.classList.add('w-25');
-  deleteButton.classList.add('my-2');
-  deleteButton.classList.add('mx-auto');
-  divBook.appendChild(deleteButton);
-
-  // Remove chield divbook from the parent booklist div
-  deleteButton.addEventListener('click', () => {
-    bookList.removeChild(divBook);
-  });
-
-  bookList.appendChild(divBook);
-};
-
-// create a book
-const addBookToLibrary = (name, description, pages, read = false) => {
-  const bookObj = {
-    bookname: name, bdescription: description, pagesnum: pages, status: read,
-  };
-  library.push(bookObj);
-  addBookDom(bookObj);
-};
-
-// get the book info frm the form:
-
-submitButton.addEventListener('click', (e) => {
-  e.preventDefault();
-
-  const bname = document.getElementById('name').value;
-  const npages = document.getElementById('pages').value;
-  const bdescription = document.getElementById('description').value;
-
-  addBookToLibrary(bname, bdescription, npages);
+}
+// EVENT LISTENERS
+submitButton.addEventListener('click', (bookData) => {
+  bookData.preventDefault();
+  const title = document.getElementById('title').value;
+  const author = document.getElementById('author').value;
+  let pages = document.getElementById('pages').value;
+  // eslint-disable-next-line radix
+  pages = parseInt(pages);
+  let read = '';
+  if (document.getElementById('Not yet read').checked) {
+    read = document.getElementById('Not yet read').value;
+  } else {
+    read = document.getElementById('Finished reading').value;
+  }
+  addBookToLibrary(title, author, pages, read);
   form.reset();
-  form.style.display = 'none';
+  pushToDom();
+});
+
+addBook.addEventListener('click', (e) => {
+  if (form.classList.contains('d-none')) {
+    e.target.textContent = 'Hide Form';
+    form.classList.remove('d-none');
+  } else {
+    e.target.textContent = 'Add Book';
+    form.classList.add('d-none');
+  }
 });

@@ -22,8 +22,7 @@
 
 ### Built With
 
-* [JAVASCRIPT]
-* [BOOTSTRAP]
+* [JAVASCRIPT] [BOOTSTRAP]
 
 ## Live Version
 
